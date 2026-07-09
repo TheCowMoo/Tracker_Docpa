@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOCPA Tracker Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>⏱</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <div class="login-card">
+                <h1 class="logo">DOCPA</h1>
+                <p class="subtitle">Time Tracker</p>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="api-key">API Key</label>
+                        <input type="password" id="api-key" placeholder="Enter your API key" required autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                </form>
+                <p class="error-message" id="login-error"></p>
+            </div>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboard-screen" class="screen">
+            <!-- Top Navigation -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h2 class="logo-small">DOCPA</h2>
+                    <span class="user-badge" id="user-badge"></span>
+                </div>
+                <nav class="topbar-nav">
+                    <button class="nav-btn active" data-view="overview">Overview</button>
+                    <button class="nav-btn" data-view="timeline">Timeline</button>
+                    <button class="nav-btn" data-view="reports">Reports</button>
+                </nav>
+                <div class="topbar-right">
+                    <button id="btn-logout" class="btn btn-sm btn-outline">Sign Out</button>
+                </div>
+            </header>
+
+            <!-- Views -->
+            <main class="content">
+                <!-- Overview -->
+                <section id="view-overview" class="view active">
+                    <div class="status-card" id="status-card">
+                        <div class="status-indicator">
+                            <span class="status-dot" id="status-dot"></span>
+                            <span id="status-text">Checking...</span>
+                        </div>
+                        <div class="status-details">
+                            <div class="stat">
+                                <span class="stat-label">Session Started</span>
+                                <span class="stat-value" id="stat-start">--</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Duration</span>
+                                <span class="stat-value" id="stat-duration">--</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Screenshots</span>
+                                <span class="stat-value" id="stat-shots">--</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Machine</span>
+                                <span class="stat-value" id="stat-machine">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cards-row">
+                        <div class="card">
+                            <h3>Today's Activity</h3>
+                            <div class="today-stats">
+                                <div class="today-stat">
+                                    <span class="today-value" id="today-active">0</span>
+                                    <span class="today-label">Active Min</span>
+                                </div>
+                                <div class="today-stat">
+                                    <span class="today-value" id="today-idle">0</span>
+                                    <span class="today-label">Idle Min</span>
+                                </div>
+                                <div class="today-stat">
+                                    <span class="today-value" id="today-productivity">0%</span>
+                                    <span class="today-label">Productivity</span>
+                                </div>
+                                <div class="today-stat">
+                                    <span class="today-value" id="today-streak">0</span>
+                                    <span class="today-label">Day Streak</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3>Recent Sessions</h3>
+                            <div id="recent-sessions-list">
+                                <p class="muted">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Timeline -->
+                <section id="view-timeline" class="view">
+                    <div class="timeline-controls">
+                        <h3>Screenshot Timeline</h3>
+                        <div class="timeline-filters">
+                            <select id="tl-session-select">
+                                <option value="">-- Select a session --</option>
+                            </select>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="tl-show-idle" checked> Show idle
+                            </label>
+                        </div>
+                    </div>
+                    <div id="timeline-grid" class="timeline-grid">
+                        <p class="muted">Select a session to view screenshots.</p>
+                    </div>
+                    <div class="timeline-pagination" id="tl-pagination"></div>
+                </section>
+
+                <!-- Reports -->
+                <section id="view-reports" class="view">
+                    <div class="reports-controls">
+                        <h3>Activity Reports</h3>
+                        <div class="report-filters">
+                            <input type="date" id="report-from">
+                            <input type="date" id="report-to">
+                            <select id="report-group">
+                                <option value="day">Daily</option>
+                                <option value="week">Weekly</option>
+                                <option value="hour">Hourly</option>
+                            </select>
+                            <button id="btn-refresh-report" class="btn btn-sm btn-primary">Refresh</button>
+                        </div>
+                    </div>
+                    <div class="report-charts">
+                        <div class="chart-wrapper">
+                            <canvas id="chart-activity"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chart-productivity"></canvas>
+                        </div>
+                    </div>
+                    <div class="report-summary" id="report-summary"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "_comment": "DOCPA Tracker — Configuration File",
+    "vps_url": "https://tracker.docharteredaccountant.com",
+    "api_key": "",
+    "interval_seconds": 300,
+    "image_quality": 50,
+    "idle_timeout_minutes": 5,
+    "idle_check_interval_seconds": 30,
+    "max_offline_queue_size": 50,
+    "retry_interval_seconds": 60,
+    "auto_start": true,
+    "minimize_to_tray": true,
+    "log_level": "INFO"
+}
