@@ -16,15 +16,15 @@ define('DB_PASS', '');
 // Storage
 define('SCREENSHOTS_DIR', __DIR__ . '/../data/screenshots/');
 define('THUMBNAILS_DIR', __DIR__ . '/../data/thumbnails/');
-define('MAX_SCREENSHOT_AGE_DAYS', 90);       // Auto-clean images older than this
+define('MAX_SCREENSHOT_AGE_DAYS', 90);
 define('THUMBNAIL_WIDTH', 320);
 define('THUMBNAIL_HEIGHT', 240);
 
 // Session & Security
-define('API_KEY_BYTES', 32);                 // Length of generated API keys
-define('SESSION_TIMEOUT_MINUTES', 5);        // If no heartbeat for N min, mark idle
+define('API_KEY_BYTES', 32);
+define('SESSION_TIMEOUT_MINUTES', 5);
 define('MAX_UPLOAD_SIZE_MB', 5);
-define('ALLOWED_ORIGINS', '*');              // CORS — restrict in production
+define('ALLOWED_ORIGINS', '*');
 
 // Upload retention
 define('KEEP_FULL_RES_DAYS', 7);

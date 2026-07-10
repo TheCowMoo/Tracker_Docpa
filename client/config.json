@@ -1,7 +1,7 @@
 {
     "_comment": "DOCPA Tracker — Configuration File",
-    "vps_url": "https://tracker.docharteredaccountant.com",
-    "api_key": "",
+    "vps_url": "http://159.198.40.106",
+    "api_key": "8c9fc8361335efc35ca9c302b0de5fef59bd76fa9fe23711699dafee34891447",
     "interval_seconds": 300,
     "image_quality": 50,
     "idle_timeout_minutes": 5,

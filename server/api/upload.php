@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // Authenticate
 $user = authenticate();
 
+try {
+
 // Validate file
 if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
     json_error('File upload failed or no file provided.', 400);
@@ -181,6 +183,10 @@ json_response([
     'thumbnail'    => $thumbnail_created,
     'is_idle'      => $is_idle,
 ], 201);
+
+} catch (\Throwable $e) {
+    json_error('Upload error: ' . $e->getMessage(), 500);
+}
 
 // ----------------------------------------------------------------
 

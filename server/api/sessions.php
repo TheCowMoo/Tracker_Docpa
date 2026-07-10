@@ -29,23 +29,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $user = authenticate();
 $action = $_GET['action'] ?? '';
 
-switch ($_SERVER['REQUEST_METHOD']) {
-    case 'GET':
-        if ($action === 'current') {
-            handle_get_current($user);
-        } else {
-            handle_list($user);
-        }
-        break;
-    case 'POST':
-        if ($action === 'end') {
-            handle_end($user);
-        } else {
-            json_error('Unknown action. Use ?action=end', 400);
-        }
-        break;
-    default:
-        json_error('Method not allowed.', 405);
+try {
+    switch ($_SERVER['REQUEST_METHOD']) {
+        case 'GET':
+            if ($action === 'current') {
+                handle_get_current($user);
+            } else {
+                handle_list($user);
+            }
+            break;
+        case 'POST':
+            if ($action === 'end') {
+                handle_end($user);
+            } else {
+                json_error('Unknown action. Use ?action=end', 400);
+            }
+            break;
+        default:
+            json_error('Method not allowed.', 405);
+    }
+} catch (\Throwable $e) {
+    json_error('Internal server error: ' . $e->getMessage(), 500);
 }
 
 // ----------------------------------------------------------------

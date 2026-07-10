@@ -22,20 +22,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-$action = $_GET['action'] ?? '';
+try {
+    $action = $_GET['action'] ?? '';
 
-switch ($action) {
-    case 'register':
-        handle_register();
-        break;
-    case 'login':
-        handle_login();
-        break;
-    case 'verify':
-        handle_verify();
-        break;
-    default:
-        json_error('Unknown action. Use ?action=register, ?action=login, or ?action=verify.', 400);
+    switch ($action) {
+        case 'register':
+            handle_register();
+            break;
+        case 'login':
+            handle_login();
+            break;
+        case 'verify':
+            handle_verify();
+            break;
+        default:
+            json_error('Unknown action. Use ?action=register, ?action=login, or ?action=verify.', 400);
+    }
+} catch (\Throwable $e) {
+    json_error('Internal server error: ' . $e->getMessage(), 500);
 }
 
 // ----------------------------------------------------------------

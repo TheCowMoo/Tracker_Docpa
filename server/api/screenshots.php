@@ -36,10 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 $user = authenticate();
 $action = $_GET['action'] ?? '';
 
-if ($action === 'image') {
-    handle_serve_image($user);
-} else {
-    handle_list($user);
+try {
+    if ($action === 'image') {
+        handle_serve_image($user);
+    } else {
+        handle_list($user);
+    }
+} catch (\Throwable $e) {
+    json_error('Internal server error: ' . $e->getMessage(), 500);
 }
 
 // ----------------------------------------------------------------

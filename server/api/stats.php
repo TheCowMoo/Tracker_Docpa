@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 
 $user = authenticate();
 
+try {
+
 // Admin can view any user's stats
 $target_user_id = $user['id'];
 if (!empty($_GET['user_id']) && $user['username'] === 'admin') {
@@ -146,3 +148,7 @@ json_response([
     'screenshots'          => $screenshots_summary,
     'totals'               => $totals,
 ]);
+
+} catch (\Throwable $e) {
+    json_error('Stats error: ' . $e->getMessage(), 500);
+}

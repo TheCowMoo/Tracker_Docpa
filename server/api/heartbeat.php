@@ -26,15 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 $user = authenticate();
 
-switch ($_SERVER['REQUEST_METHOD']) {
-    case 'POST':
-        handle_heartbeat($user);
-        break;
-    case 'GET':
-        handle_status($user);
-        break;
-    default:
-        json_error('Method not allowed.', 405);
+try {
+    switch ($_SERVER['REQUEST_METHOD']) {
+        case 'POST':
+            handle_heartbeat($user);
+            break;
+        case 'GET':
+            handle_status($user);
+            break;
+        default:
+            json_error('Method not allowed.', 405);
+    }
+} catch (\Throwable $e) {
+    json_error('Internal server error: ' . $e->getMessage(), 500);
 }
 
 // ----------------------------------------------------------------
