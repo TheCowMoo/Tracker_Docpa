@@ -17,6 +17,12 @@ cp server/api/heartbeat.php ../public_html/api/
 # Copy includes
 cp server/includes/db.php ../public_html/includes/
 cp server/includes/config.php ../public_html/includes/
+cp server/includes/auth_middleware.php ../public_html/includes/
+
+# Copy dashboard
+cp server/dashboard/index.html ../public_html/dashboard/
+cp server/dashboard/css/style.css ../public_html/dashboard/css/
+cp server/dashboard/js/app.js ../public_html/dashboard/js/
 
 echo "Update complete. Testing API..."
 
