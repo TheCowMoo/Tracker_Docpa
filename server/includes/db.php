@@ -4,7 +4,6 @@
  */
 
 require_once __DIR__ . '/config.php';
-get_config();
 
 /**
  * Get a PDO database connection.
