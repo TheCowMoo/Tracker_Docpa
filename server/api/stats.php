@@ -66,9 +66,9 @@ $sessions_summary = db_fetch_all(
         COUNT(*) as session_count,
         COALESCE(SUM(total_active_seconds), 0) as total_active_seconds,
         COALESCE(SUM(total_idle_seconds), 0) as total_idle_seconds
-     FROM sessions
-     WHERE user_id = ?
-       AND start_time >= ? AND start_time <= ? + INTERVAL 1 DAY
+     FROM sessions s
+     WHERE s.user_id = ?
+       AND s.start_time >= ? AND s.start_time <= ? + INTERVAL 1 DAY
        AND status = 'ended'
      GROUP BY period
      ORDER BY period ASC",
